@@ -1,0 +1,38 @@
+# 環境変数（.env.example は含める）
+.env
+
+# Rails標準
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/.keep
+
+# ストレージ・アセット
+/storage/*
+!/storage/.keep
+/public/assets
+/public/packs
+/public/packs-test
+
+# Bundler
+/.bundle
+/vendor/bundle
+
+# DB
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# テスト
+/coverage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
