@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_04_29_000009) do
+ActiveRecord::Schema[7.2].define(version: 2026_04_30_000002) do
   create_table "board_posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "target_user_id", null: false
     t.bigint "author_id"
@@ -23,7 +23,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_29_000009) do
     t.datetime "updated_at", null: false
     t.index ["author_id"], name: "index_board_posts_on_author_id"
     t.index ["target_user_id", "post_type"], name: "index_board_posts_on_target_user_id_and_post_type"
-    t.index ["target_user_id"], name: "index_board_posts_on_target_user_id"
   end
 
   create_table "communities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -63,19 +62,19 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_29_000009) do
   create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "from_user_id", null: false
     t.bigint "to_user_id", null: false
-    t.string "action", null: false
+    t.string "action", limit: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["from_user_id", "action"], name: "index_likes_on_from_user_id_and_action"
     t.index ["from_user_id", "to_user_id"], name: "index_likes_on_from_user_id_and_to_user_id", unique: true
     t.index ["from_user_id"], name: "index_likes_on_from_user_id"
     t.index ["to_user_id", "action"], name: "index_likes_on_to_user_id_and_action"
-    t.index ["to_user_id"], name: "index_likes_on_to_user_id"
   end
 
   create_table "matches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user1_id", null: false
     t.bigint "user2_id", null: false
-    t.datetime "matched_at"
+    t.datetime "matched_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user1_id", "user2_id"], name: "index_matches_on_user1_id_and_user2_id", unique: true
@@ -90,31 +89,29 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_29_000009) do
     t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_at"], name: "index_messages_on_created_at"
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id", "receiver_id"], name: "index_messages_on_sender_id_and_receiver_id"
+    t.index ["sender_id", "receiver_id", "created_at"], name: "index_messages_on_conversation"
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
   create_table "user_images", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "image_url", null: false
+    t.text "image_url", null: false
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "position"], name: "index_user_images_on_user_id_and_position"
-    t.index ["user_id"], name: "index_user_images_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "name", null: false
-    t.integer "age", null: false
+    t.integer "age", limit: 1, null: false, unsigned: true
     t.text "bio"
-    t.string "image_url"
+    t.text "image_url"
     t.string "gender"
-    t.integer "height"
+    t.integer "height", limit: 2
     t.string "body_type"
     t.string "line"
     t.string "preferred_line"
@@ -126,6 +123,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_29_000009) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["random_match_enabled", "age"], name: "index_users_on_random_match_enabled_and_age"
   end
 
   add_foreign_key "board_posts", "users", column: "author_id"
