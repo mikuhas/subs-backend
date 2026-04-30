@@ -36,3 +36,28 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+# Byebug
+.byebug_history
+
+# Rerun
+rerun.txt
+
+# Local environment
+.env.local
+.env.*.local
+
+# Public uploads (CarrierWave等)
+public/system
+
+# Rubyバージョン
+.ruby-version
+
+# Docker
+.docker/
+
+# フロントエンド（モノレポの場合）
+node_modules/

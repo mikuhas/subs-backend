@@ -6,6 +6,7 @@ RUN apt-get update -qq && apt-get install -y \
     default-mysql-client \
     git \
     curl \
+    libyaml-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

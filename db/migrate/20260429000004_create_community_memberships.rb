@@ -3,7 +3,7 @@ class CreateCommunityMemberships < ActiveRecord::Migration[7.2]
     create_table :community_memberships do |t|
       t.references :user,      null: false, foreign_key: true
       t.references :community, null: false, foreign_key: true
-      t.datetime   :joined_at, null: false, default: -> { 'CURRENT_TIMESTAMP' }
+      t.datetime   :joined_at
 
       t.timestamps
     end
