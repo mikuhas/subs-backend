@@ -44,60 +44,117 @@ LINES = %w[
 
 # 画像はプレースホルダーURL（本番では実画像URLに差し替え）
 users_data = [
+  # ── 女性ユーザー ──────────────────────────────────────────
   {
-    email: 'hanako@example.com', name: '田中花子', age: 25,
+    email: 'hanako@example.com', name: '田中花子', age: 25, gender: 'womens',
     image_url: 'https://randomuser.me/api/portraits/women/1.jpg',
     line: LINES[0], distance_km: 10.5,
-    bio: '数あるプロフィールの中から見つけていただき、ありがとうございます！音楽が生活の一部で、週末はライブハウスやフェスに行くのが楽しみです。レコードショップ巡りにもハマっています。美味しいごはんやお酒を一緒に楽しめる方と出会えたら嬉しいです。',
+    bio: '数あるプロフィールの中から見つけていただき、ありがとうございます！音楽が生活の一部で、週末はライブハウスやフェスに行くのが楽しみです。レコードショップ巡りにもハマっています。',
     sub_images: [
       'https://randomuser.me/api/portraits/women/2.jpg',
       'https://randomuser.me/api/portraits/women/3.jpg',
     ],
-    community_indices: [0, 5],   # カフェ部, 読書Salon
+    community_indices: [0, 5],
   },
   {
-    email: 'misaki@example.com', name: '佐藤美咲', age: 23,
+    email: 'misaki@example.com', name: '佐藤美咲', age: 23, gender: 'womens',
     image_url: 'https://randomuser.me/api/portraits/women/4.jpg',
     line: LINES[1], distance_km: 17.4,
-    bio: '都内のカフェ巡りに没頭しています☕️ カメラを片手にふらふら散策するのが好きです。笑いのツボが合う方と出会いたいです！',
+    bio: '都内のカフェ巡りに没頭しています☕ カメラを片手にふらふら散策するのが好きです。笑いのツボが合う方と出会いたいです！',
     sub_images: [
       'https://randomuser.me/api/portraits/women/5.jpg',
       'https://randomuser.me/api/portraits/women/6.jpg',
     ],
-    community_indices: [0, 4],   # カフェ部, グルメ探検隊
+    community_indices: [0, 4],
   },
   {
-    email: 'yumi@example.com', name: '鈴木由美', age: 27,
+    email: 'yumi@example.com', name: '鈴木由美', age: 27, gender: 'womens',
     image_url: 'https://randomuser.me/api/portraits/women/7.jpg',
     line: LINES[2], distance_km: 24.6,
-    bio: 'ヨガとハイキングが好きなWebデザイナーです。自然の中でエネルギーをチャージしています🧘 お互いに自立した「大人の関係」を築けたらと思っています。',
+    bio: 'ヨガとハイキングが好きなWebデザイナーです。自然の中でエネルギーをチャージしています。お互いに自立した関係を築けたらと思っています。',
     sub_images: [
       'https://randomuser.me/api/portraits/women/8.jpg',
       'https://randomuser.me/api/portraits/women/9.jpg',
     ],
-    community_indices: [3, 15],  # アウトドア部, ヨガ・フィットネス
+    community_indices: [3, 15],
   },
   {
-    email: 'keiko@example.com', name: '山田恵子', age: 24,
+    email: 'keiko@example.com', name: '山田恵子', age: 24, gender: 'womens',
     image_url: 'https://randomuser.me/api/portraits/women/10.jpg',
     line: LINES[3], distance_km: 31.0,
-    bio: '映画と本が大好きです🎬 月に10本以上観ています。映画を観た後に感想を語り合えるパートナーを探しています。おすすめ交換しましょう！',
+    bio: '映画と本が大好きです。月に10本以上観ています。映画を観た後に感想を語り合えるパートナーを探しています。',
     sub_images: [
       'https://randomuser.me/api/portraits/women/11.jpg',
       'https://randomuser.me/api/portraits/women/12.jpg',
     ],
-    community_indices: [8, 5],   # 映画部, 読書Salon
+    community_indices: [8, 5],
   },
   {
-    email: 'mai@example.com', name: '伊藤麻衣', age: 26,
+    email: 'mai@example.com', name: '伊藤麻衣', age: 26, gender: 'womens',
     image_url: 'https://randomuser.me/api/portraits/women/13.jpg',
     line: LINES[4], distance_km: 7.5,
-    bio: '旅と好奇心が原動力です🌏 15カ国以上を旅してきました。アパレルの仕事をしています。一緒に新しい世界に飛び込めるパートナーと出会いたいです！',
+    bio: '旅と好奇心が原動力です。15カ国以上を旅してきました。アパレルの仕事をしています。一緒に新しい世界に飛び込めるパートナーと出会いたいです！',
     sub_images: [
       'https://randomuser.me/api/portraits/women/14.jpg',
       'https://randomuser.me/api/portraits/women/15.jpg',
     ],
-    community_indices: [2, 11],  # 旅行仲間, ファッション部
+    community_indices: [2, 11],
+  },
+  # ── 男性ユーザー ──────────────────────────────────────────
+  {
+    email: 'taro@example.com', name: '山本太郎', age: 28, gender: 'mens',
+    image_url: 'https://randomuser.me/api/portraits/men/1.jpg',
+    line: LINES[0], distance_km: 8.2,
+    bio: 'IT企業でエンジニアをしています。週末はロードバイクか登山。アウトドアが好きな方、一緒に自然を楽しみましょう！話しかけやすい方が好きです。',
+    sub_images: [
+      'https://randomuser.me/api/portraits/men/2.jpg',
+      'https://randomuser.me/api/portraits/men/3.jpg',
+    ],
+    community_indices: [3, 6],
+  },
+  {
+    email: 'kenji@example.com', name: '佐々木健二', age: 30, gender: 'mens',
+    image_url: 'https://randomuser.me/api/portraits/men/4.jpg',
+    line: LINES[5], distance_km: 14.0,
+    bio: '料理が趣味のサラリーマンです。休日は新しいレシピに挑戦しています。一緒においしいものを食べに行ける方を探しています。',
+    sub_images: [
+      'https://randomuser.me/api/portraits/men/5.jpg',
+      'https://randomuser.me/api/portraits/men/6.jpg',
+    ],
+    community_indices: [4, 9],
+  },
+  {
+    email: 'ryota@example.com', name: '中村亮太', age: 25, gender: 'mens',
+    image_url: 'https://randomuser.me/api/portraits/men/7.jpg',
+    line: LINES[6], distance_km: 20.3,
+    bio: '映画とアートが好きなフリーランスデザイナーです。美術館や映画館によく行きます。感性が合う方と出会えたら嬉しいです。',
+    sub_images: [
+      'https://randomuser.me/api/portraits/men/8.jpg',
+      'https://randomuser.me/api/portraits/men/9.jpg',
+    ],
+    community_indices: [8, 10],
+  },
+  {
+    email: 'shota@example.com', name: '高橋翔太', age: 27, gender: 'mens',
+    image_url: 'https://randomuser.me/api/portraits/men/10.jpg',
+    line: LINES[9], distance_km: 5.8,
+    bio: '旅行と音楽が大好きです。バンドでギターを弾いています。国内外問わず旅行に行くのが好きで、一緒に旅できる方を探しています。',
+    sub_images: [
+      'https://randomuser.me/api/portraits/men/11.jpg',
+      'https://randomuser.me/api/portraits/men/12.jpg',
+    ],
+    community_indices: [1, 2],
+  },
+  {
+    email: 'daisuke@example.com', name: '田村大輔', age: 29, gender: 'mens',
+    image_url: 'https://randomuser.me/api/portraits/men/13.jpg',
+    line: LINES[7], distance_km: 28.5,
+    bio: '体を動かすことが好きなトレーナーです。ジムやスポーツ観戦が趣味。健康的な生活を一緒に楽しめるパートナーを探しています。',
+    sub_images: [
+      'https://randomuser.me/api/portraits/men/14.jpg',
+      'https://randomuser.me/api/portraits/men/15.jpg',
+    ],
+    community_indices: [6, 15],
   },
 ]
 
@@ -148,4 +205,19 @@ if BoardPost.none?
 end
 
 puts "  ✅ #{BoardPost.count} board_posts"
+
+# ── いいね（taro へ女性3名からのいいね）────────────────────────────
+puts "🌱 Seeding likes..."
+taro = User.find_by(email: 'taro@example.com')
+if taro
+  %w[hanako@example.com misaki@example.com yumi@example.com].each do |email|
+    liker = User.find_by(email: email)
+    next unless liker
+    Like.find_or_create_by!(from_user_id: liker.id, to_user_id: taro.id) do |l|
+      l.action = 'like'
+    end
+  end
+end
+puts "  ✅ #{Like.count} likes"
+
 puts "\n🎉 Seed 完了！"

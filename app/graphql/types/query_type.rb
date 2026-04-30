@@ -3,7 +3,8 @@ module Types
     field :health_check, String,                   null: false, description: 'API疎通確認'
     field :me,           Types::UserType,           null: true,  description: '認証中のユーザー'
     field :communities,  [Types::CommunityType],   null: false, description: 'コミュニティ一覧'
-    field :candidates,   [Types::UserType],         null: false, description: 'スワイプ候補一覧'
+    field :candidates,      [Types::UserType], null: false, description: 'スワイプ候補一覧'
+    field :received_likes,  [Types::UserType], null: false, description: '自分をいいねしたユーザー一覧'
     field :matches,      [Types::MatchType],        null: false, description: 'マッチ一覧'
     field :messages,     [Types::MessageType],      null: false, description: 'メッセージ一覧' do
       argument :partner_id, ID, required: true
@@ -22,6 +23,11 @@ module Types
     def candidates
       authenticate!
       ::Matching::ListCandidates.new.call(current_user_id: context[:current_user].id)
+    end
+
+    def received_likes
+      authenticate!
+      ::Matching::ListReceivedLikes.new.call(current_user_id: context[:current_user].id)
     end
 
     def matches

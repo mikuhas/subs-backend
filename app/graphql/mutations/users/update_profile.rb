@@ -11,8 +11,9 @@ module Mutations
       argument :preferred_line,         String,  required: false
       argument :preferred_meeting_area, String,  required: false
       argument :frequent_station,       String,  required: false
-      argument :first_date_station,     String,  required: false
-      argument :image_url,              String,  required: false
+      argument :first_date_station,      String,  required: false
+      argument :image_url,               String,  required: false
+      argument :random_match_enabled,    Boolean, required: false
 
       field :user,   Types::UserType, null: true
       field :errors, [String],        null: false

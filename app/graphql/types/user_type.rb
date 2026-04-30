@@ -16,5 +16,15 @@ module Types
     field :random_match_enabled,   Boolean,   null: false
     field :distance_km,            Float,     null: true
     field :community_ids,          [Integer], null: false
+    field :sent_like_count, Integer, null: false
+    field :sent_skip_count, Integer, null: false
+
+    def sent_like_count
+      object.sent_likes.where(action: 'like').count
+    end
+
+    def sent_skip_count
+      object.sent_likes.where(action: 'skip').count
+    end
   end
 end
