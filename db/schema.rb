@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_04_30_000002) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
   create_table "board_posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "target_user_id", null: false
     t.bigint "author_id"
@@ -110,7 +110,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_30_000002) do
     t.integer "age", limit: 1, null: false, unsigned: true
     t.text "bio"
     t.text "image_url"
-    t.string "gender"
+    t.string "gender", null: false
     t.integer "height", limit: 2
     t.string "body_type"
     t.string "line"
@@ -124,6 +124,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_04_30_000002) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["random_match_enabled", "age"], name: "index_users_on_random_match_enabled_and_age"
+    t.check_constraint "`gender` in (_utf8mb4'mens',_utf8mb4'womens')", name: "chk_users_gender"
   end
 
   add_foreign_key "board_posts", "users", column: "author_id"

@@ -22,7 +22,11 @@ module Types
 
     def candidates
       authenticate!
-      ::Matching::ListCandidates.new.call(current_user_id: context[:current_user].id)
+      user = context[:current_user]
+      ::Matching::ListCandidates.new.call(
+        current_user_id:     user.id,
+        current_user_gender: user.gender,
+      )
     end
 
     def received_likes

@@ -5,7 +5,7 @@ module Types
     field :age,                    Integer,   null: false
     field :bio,                    String,    null: true
     field :image_url,              String,    null: true
-    field :gender,                 String,    null: true
+    field :gender,                 String,    null: false
     field :line,                   String,    null: true
     field :height,                 Integer,   null: true
     field :body_type,              String,    null: true

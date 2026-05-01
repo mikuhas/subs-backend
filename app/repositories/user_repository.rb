@@ -17,8 +17,14 @@ class UserRepository
     user
   end
 
-  def find_candidates(current_user_id:)
+  OPPOSITE_GENDER = { 'mens' => 'womens', 'womens' => 'mens' }.freeze
+
+  def find_candidates(current_user_id:, current_user_gender: nil)
     swiped_ids = Like.where(from_user_id: current_user_id).pluck(:to_user_id)
-    User.where.not(id: [current_user_id, *swiped_ids])
+    scope = User.where.not(id: [current_user_id, *swiped_ids])
+    if (opposite = OPPOSITE_GENDER[current_user_gender])
+      scope = scope.where(gender: opposite)
+    end
+    scope
   end
 end

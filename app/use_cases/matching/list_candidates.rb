@@ -4,8 +4,8 @@
         @user_repo = user_repo
       end
 
-      def call(current_user_id:)
-        @user_repo.find_candidates(current_user_id:)
+      def call(current_user_id:, current_user_gender: nil)
+        @user_repo.find_candidates(current_user_id:, current_user_gender:)
       end
     end
   end

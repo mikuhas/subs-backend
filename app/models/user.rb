@@ -14,9 +14,10 @@ class User < ApplicationRecord
   has_many :sent_intentions,     class_name: 'Intention', foreign_key: :from_user_id, dependent: :destroy
   has_many :received_intentions, class_name: 'Intention', foreign_key: :to_user_id,   dependent: :destroy
 
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :name,  presence: true
-  validates :age,   presence: true, numericality: { greater_than_or_equal_to: 18 }
+  validates :email,  presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :name,   presence: true
+  validates :age,    presence: true, numericality: { greater_than_or_equal_to: 18 }
+  validates :gender, presence: true, inclusion: { in: %w[mens womens] }
 
   def sub_image_urls
     user_images.map(&:image_url)
