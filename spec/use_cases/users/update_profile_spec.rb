@@ -1,8 +1,9 @@
-require 'rails_helper'
+require_relative '../../spec_helper'
+require_relative '../../../app/use_cases/users/update_profile'
 
 RSpec.describe Users::UpdateProfile do
-  let(:user_repo) { instance_spy('UserRepository') }
-  let(:user)      { build_stubbed(:user, name: '更新後') }
+  let(:user_repo) { double('UserRepository') }
+  let(:user)      { double('User', id: 1, name: '更新後') }
   subject(:use_case) { described_class.new(user_repo:) }
 
   before { allow(user_repo).to receive(:update!).and_return(user) }

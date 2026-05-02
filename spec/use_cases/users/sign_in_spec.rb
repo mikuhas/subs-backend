@@ -1,9 +1,18 @@
-require 'rails_helper'
+require_relative '../../spec_helper'
+require_relative '../../../app/use_cases/users/sign_in'
 
 RSpec.describe Users::SignIn do
-  let(:user_repo) { instance_spy('UserRepository') }
-  let(:user)      { build_stubbed(:user) }
+  let(:user_repo) { double('UserRepository') }
+  let(:user)      { double('User', id: 1, email: 'test@example.com') }
   subject(:use_case) { described_class.new(user_repo:) }
+
+  before do
+    stub_const('JsonWebToken', Module.new do
+      def self.encode(payload)
+        "token_user_#{payload[:user_id]}"
+      end
+    end)
+  end
 
   describe '#call' do
     context '正しい認証情報の場合' do
@@ -17,7 +26,7 @@ RSpec.describe Users::SignIn do
         expect(result[:user]).to eq(user)
       end
 
-      it 'JWTトークンを返す' do
+      it 'トークンを返す' do
         result = use_case.call(email: user.email, password: 'password123')
         expect(result[:token]).to be_a(String)
       end

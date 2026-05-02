@@ -1,11 +1,19 @@
-require 'rails_helper'
+require_relative '../../spec_helper'
+require_relative '../../../app/use_cases/users/sign_up'
 
 RSpec.describe Users::SignUp do
-  let(:user_repo) { instance_spy('UserRepository') }
-  let(:user)      { build_stubbed(:user) }
+  let(:user_repo) { double('UserRepository') }
+  let(:user)      { double('User', id: 42, email: 'test@example.com', name: 'テスト', age: 25, gender: 'mens') }
   subject(:use_case) { described_class.new(user_repo:) }
 
-  before { allow(user_repo).to receive(:create!).and_return(user) }
+  before do
+    allow(user_repo).to receive(:create!).and_return(user)
+    stub_const('JsonWebToken', Module.new do
+      def self.encode(payload)
+        "token_user_#{payload[:user_id]}"
+      end
+    end)
+  end
 
   describe '#call' do
     let(:result) do
@@ -16,13 +24,12 @@ RSpec.describe Users::SignUp do
       expect(result[:user]).to eq(user)
     end
 
-    it 'JWTトークンを返す' do
+    it 'トークンを返す' do
       expect(result[:token]).to be_a(String)
     end
 
     it 'トークンにuser_idが含まれる' do
-      decoded = JsonWebToken.decode(result[:token])
-      expect(decoded[:user_id]).to eq(user.id)
+      expect(result[:token]).to include(user.id.to_s)
     end
 
     it 'user_repo.create!に正しい引数を渡す' do

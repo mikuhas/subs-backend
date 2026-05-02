@@ -18,10 +18,10 @@ gem "puma", ">= 5.0"
 gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem "bootsnap", "~> 1.18", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -31,7 +31,7 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "debug", require: "debug/prelude"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
@@ -49,6 +49,9 @@ gem "graphql", "~> 2.3"
 
 gem "jwt", "~> 2.9"
 
+gem "minitest", "~> 5.22", :groups => [:development, :test]
+gem "rspec", "~> 3.13", :groups => [:development, :test]
 gem "rspec-rails", "~> 8.0", :groups => [:development, :test]
+gem "ruby-lsp-rspec", require: false, :groups => [:development, :test]
 gem "factory_bot_rails", "~> 6.5", :groups => [:development, :test]
 gem "faker", "~> 3.8", :groups => [:development, :test]

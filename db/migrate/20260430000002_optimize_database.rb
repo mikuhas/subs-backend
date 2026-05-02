@@ -1,8 +1,13 @@
 class OptimizeDatabase < ActiveRecord::Migration[7.2]
   def up
     # ── users ──────────────────────────────────────────────────────────────
-    change_column :users, :age,    :integer, limit: 1, unsigned: true, null: false
-    change_column :users, :height, :integer, limit: 2
+    if ActiveRecord::Base.connection.adapter_name == 'Mysql2'
+      change_column :users, :age,    :integer, limit: 1, unsigned: true, null: false
+      change_column :users, :height, :integer, limit: 2
+    else
+      change_column :users, :age,    :integer, null: false
+      change_column :users, :height, :integer
+    end
     add_index :users, [:random_match_enabled, :age],
               name: 'index_users_on_random_match_enabled_and_age',
               if_not_exists: true

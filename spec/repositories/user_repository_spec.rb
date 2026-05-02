@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../rails_helper'
 
 RSpec.describe UserRepository do
   subject(:repo) { described_class.new }

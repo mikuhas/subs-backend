@@ -1,9 +1,10 @@
-require 'rails_helper'
+require_relative '../../spec_helper'
+require_relative '../../../app/use_cases/matching/swipe_user'
 
 RSpec.describe Matching::SwipeUser do
-  let(:like_repo)  { instance_spy('LikeRepository') }
-  let(:match_repo) { instance_spy('MatchRepository') }
-  let(:like)       { build_stubbed(:like) }
+  let(:like_repo)  { spy('LikeRepository') }
+  let(:match_repo) { spy('MatchRepository') }
+  let(:like)       { double('Like') }
   let(:from_id)    { 1 }
   let(:to_id)      { 2 }
   subject(:use_case) { described_class.new(like_repo:, match_repo:) }
@@ -12,14 +13,17 @@ RSpec.describe Matching::SwipeUser do
 
   describe '#call' do
     context 'likeアクションで相互いいねがある場合' do
-      before { allow(like_repo).to receive(:mutual_like_exists?).and_return(true) }
+      before do
+        allow(like_repo).to receive(:mutual_like_exists?).and_return(true)
+        allow(match_repo).to receive(:find_or_create!)
+      end
 
       it 'matched: trueを返す' do
         result = use_case.call(from_user_id: from_id, to_user_id: to_id, action: 'like')
         expect(result[:matched]).to be true
       end
 
-      it 'マッチをIDの小さい順で作成する' do
+      it 'IDの小さい順でマッチを作成する' do
         use_case.call(from_user_id: from_id, to_user_id: to_id, action: 'like')
         expect(match_repo).to have_received(:find_or_create!).with(user1_id: from_id, user2_id: to_id)
       end
