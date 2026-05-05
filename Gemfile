@@ -21,7 +21,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "tzinfo-data"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", "~> 1.18", require: false
+gem "bootsnap", "~> 1.24", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
