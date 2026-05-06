@@ -1,5 +1,4 @@
-require_relative '../../spec_helper'
-require_relative '../../../app/use_cases/users/sign_in'
+require_relative '../../rails_helper'
 
 RSpec.describe Users::SignIn do
   let(:user_repo) { double('UserRepository') }

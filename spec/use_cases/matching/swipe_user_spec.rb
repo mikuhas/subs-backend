@@ -1,5 +1,4 @@
-require_relative '../../spec_helper'
-require_relative '../../../app/use_cases/matching/swipe_user'
+require_relative '../../rails_helper'
 
 RSpec.describe Matching::SwipeUser do
   let(:like_repo)  { spy('LikeRepository') }

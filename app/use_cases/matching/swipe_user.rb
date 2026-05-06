@@ -6,6 +6,7 @@
       end
 
       def call(from_user_id:, to_user_id:, action:)
+        Rails.logger.info "Matching::SwipeUser start from_user_id=#{from_user_id} to_user_id=#{to_user_id} action=#{action}"
         like = @like_repo.create!(from_user_id:, to_user_id:, action:)
 
         matched = false
@@ -13,8 +14,10 @@
           u1, u2 = [from_user_id, to_user_id].minmax
           @match_repo.find_or_create!(user1_id: u1, user2_id: u2)
           matched = true
+          Rails.logger.info "Matching::SwipeUser matched user1_id=#{u1} user2_id=#{u2}"
         end
 
+        Rails.logger.info "Matching::SwipeUser done matched=#{matched}"
         { like:, matched: }
       end
     end

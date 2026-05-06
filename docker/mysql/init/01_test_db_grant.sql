@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS `subs_test`;
+GRANT ALL PRIVILEGES ON `subs_test`.* TO 'subs_user'@'%';
+FLUSH PRIVILEGES;

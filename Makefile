@@ -1,6 +1,8 @@
+MYSQL_ROOT_PASSWORD := $(shell grep "^MYSQL_ROOT_PASSWORD=" .env | cut -d= -f2)
+
 .PHONY: init build up up-d down restart logs console \
         db-create db-migrate db-rollback db-reset db-seed db-status \
-        generate test lint secret
+        generate test test-db-setup lint secret
 
 # ═══════════════════════════════════════════════════
 #  初回セットアップ（一度だけ実行）
@@ -99,6 +101,11 @@ db-status:
 # ═══════════════════════════════════════════════════
 #  テスト・品質管理
 # ═══════════════════════════════════════════════════
+test-db-setup:
+	docker-compose exec -T db mysql -uroot -p$(MYSQL_ROOT_PASSWORD) -e "GRANT ALL PRIVILEGES ON \`subs_test\`.* TO 'subs_user'@'%'; FLUSH PRIVILEGES;"
+	docker-compose exec api bundle exec rails db:create RAILS_ENV=test
+	docker-compose exec api bundle exec rails db:migrate RAILS_ENV=test
+
 test:
 	docker-compose exec api bundle exec rspec
 

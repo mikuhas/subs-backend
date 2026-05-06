@@ -11,9 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
-  create_table "board_posts", force: :cascade do |t|
-    t.integer "target_user_id", null: false
-    t.integer "author_id"
+  create_table "board_posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "target_user_id", null: false
+    t.bigint "author_id"
     t.string "post_type", null: false
     t.text "content", null: false
     t.integer "helpful_count", default: 0, null: false
@@ -25,7 +25,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.index ["target_user_id", "post_type"], name: "index_board_posts_on_target_user_id_and_post_type"
   end
 
-  create_table "communities", force: :cascade do |t|
+  create_table "communities", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "tag", null: false
     t.text "description"
@@ -36,9 +36,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.index ["tag"], name: "index_communities_on_tag"
   end
 
-  create_table "community_memberships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "community_id", null: false
+  create_table "community_memberships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "community_id", null: false
     t.datetime "joined_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,9 +47,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.index ["user_id"], name: "index_community_memberships_on_user_id"
   end
 
-  create_table "intentions", force: :cascade do |t|
-    t.integer "from_user_id", null: false
-    t.integer "to_user_id", null: false
+  create_table "intentions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "from_user_id", null: false
+    t.bigint "to_user_id", null: false
     t.string "icon", null: false
     t.string "label", null: false
     t.datetime "created_at", null: false
@@ -59,9 +59,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.index ["to_user_id"], name: "index_intentions_on_to_user_id"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.integer "from_user_id", null: false
-    t.integer "to_user_id", null: false
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "from_user_id", null: false
+    t.bigint "to_user_id", null: false
     t.string "action", limit: 10, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,9 +71,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.index ["to_user_id", "action"], name: "index_likes_on_to_user_id_and_action"
   end
 
-  create_table "matches", force: :cascade do |t|
-    t.integer "user1_id", null: false
-    t.integer "user2_id", null: false
+  create_table "matches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user1_id", null: false
+    t.bigint "user2_id", null: false
     t.datetime "matched_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -82,9 +82,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.index ["user2_id"], name: "index_matches_on_user2_id"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.integer "sender_id", null: false
-    t.integer "receiver_id", null: false
+  create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "sender_id", null: false
+    t.bigint "receiver_id", null: false
     t.text "body", null: false
     t.datetime "read_at"
     t.datetime "created_at", null: false
@@ -94,24 +94,24 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
-  create_table "user_images", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.text "image_url"
+  create_table "user_images", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "image_url", null: false
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "position"], name: "index_user_images_on_user_id_and_position"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
     t.string "name", null: false
-    t.integer "age", null: false
+    t.integer "age", limit: 1, null: false, unsigned: true
     t.text "bio"
     t.text "image_url"
     t.string "gender", null: false
-    t.integer "height"
+    t.integer "height", limit: 2
     t.string "body_type"
     t.string "line"
     t.string "preferred_line"
@@ -124,6 +124,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_05_01_000001) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["random_match_enabled", "age"], name: "index_users_on_random_match_enabled_and_age"
+    t.check_constraint "`gender` in (_utf8mb4'mens',_utf8mb4'womens')", name: "chk_users_gender"
   end
 
   add_foreign_key "board_posts", "users", column: "author_id"

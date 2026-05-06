@@ -1,5 +1,4 @@
-require_relative '../../spec_helper'
-require_relative '../../../app/use_cases/users/update_profile'
+require_relative '../../rails_helper'
 
 RSpec.describe Users::UpdateProfile do
   let(:user_repo) { double('UserRepository') }
