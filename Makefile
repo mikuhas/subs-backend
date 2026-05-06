@@ -102,8 +102,7 @@ db-status:
 #  テスト・品質管理
 # ═══════════════════════════════════════════════════
 test-db-setup:
-	docker-compose exec -T db mysql -uroot -p$(MYSQL_ROOT_PASSWORD) -e "GRANT ALL PRIVILEGES ON \`subs_test\`.* TO 'subs_user'@'%'; FLUSH PRIVILEGES;"
-	docker-compose exec api bundle exec rails db:create RAILS_ENV=test
+	docker-compose exec -T db mysql -uroot -p$(MYSQL_ROOT_PASSWORD) -e "CREATE DATABASE IF NOT EXISTS \`subs_test\`; GRANT ALL PRIVILEGES ON \`subs_test\`.* TO 'subs_user'@'%'; FLUSH PRIVILEGES;"
 	docker-compose exec api bundle exec rails db:migrate RAILS_ENV=test
 
 test:
