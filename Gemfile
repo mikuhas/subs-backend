@@ -47,7 +47,7 @@ gem "dotenv-rails", "~> 3.2"
 
 gem "graphql", "~> 2.3"
 
-gem "jwt", "~> 2.9"
+gem "jwt", "~> 3.2"
 
 gem "minitest", "~> 5.22", :groups => [:development, :test]
 gem "rspec", "~> 3.13", :groups => [:development, :test]
