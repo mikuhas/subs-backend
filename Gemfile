@@ -45,7 +45,7 @@ end
 gem "rack-cors", "~> 3.0"
 gem "dotenv-rails", "~> 3.2"
 
-gem "graphql", "~> 2.3"
+gem "graphql", "~> 2.6"
 
 gem "jwt", "~> 2.9"
 
